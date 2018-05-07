@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body style="background-image:url(../images/SB.jpg);background-repeat: no-repeat; background-size: cover;">
+<div class=" container">
+<!--<img src="<%= '../images/sb.png' %>" alt="" class="logo" style="width: 100px; display: block; margin-left: auto; margin-right: auto">-->
+<div class="col-sm-4 fixed-top" style="margin-left: 700px;">
+
+    <h1 style="color: darkgreen"><span class="fa fa-sign-in"></span> Signup</h1>
+
+    <!-- LOGIN FORM -->
+    <form action="/submitSignUp" method="post" style="background: transparent;align-content: right;color: darkgreen">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="fname" required>
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="lname" required>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <select class="form-control" name="location" id="volume">
+
+                <%
+                var options = ["San Jose", "San Mateo", "San Francisco", "San Diego"];
+                for ( var i = 0; i < options.length; i++ )
+                {
+                    var selected = (options[i] == i) ? "selected" : "";
+                %>
+                <option value="<%= options[ i ] %>" <%= selected %>><%= options[i] %></option>
+                <%
+                }
+                %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>User Name</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password" id="password" required>
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" name="cpassword" id="cpassword" required>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg">Signup</button>
+    </form>
+
+    <hr>
+
+    <strong style="color: darkgreen;font-size: x-large">Already have an account? <a href="/">Login</a></strong>
+
+
+</div>
+</div>
+</body>
+<script>
+  var password = document.getElementById("password")
+    , confirm_password = document.getElementById("cpassword");
+
+  function validatePassword() {
+    if (password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+
+
+</script>
+</html>

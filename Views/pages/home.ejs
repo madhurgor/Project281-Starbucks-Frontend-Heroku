@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        hr {
+            background-color: darkgreen;
+            min-height: 10px;
+            margin-bottom: 0px
+        }
+    </style>
+
+    <script>
+
+        function addToCart(index) {
+            //console.log("Adding to cart");
+
+            respItem = JSON.parse(document.getElementById("storedItem" + index).innerHTML);
+
+
+            console.log(respItem);
+            console.log(JSON.stringify(respItem));
+
+
+            //console.log(respItem.name);
+            var url = 'https://madhurgor-project-cmpe281.herokuapp.com/addToCart';
+            var data = respItem;
+
+            fetch(url, {
+                method: 'POST', // or 'PUT'
+                body: JSON.stringify(data), // data can be `string` or {object}!
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(res => res)
+                .then(response => alert("Item added to cart"))
+                .catch(error => console.error('Error:', error));
+        }
+
+        /*function gotocart() {
+           // console.log(cart);
+            // cart = JSON.parse(cart);
+            let url = 'https://madhurgor-project-cmpe281.herokuapp.com/cart';
+            fetch(url, {
+                method: 'GET', // or 'PUT'
+                //body: cart, // data can be `string` or {object}!
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(response => {
+                console.log("in first response");
+                return response.json();
+            })
+                .then(jsonResponse => {
+                    console.log('Go To Cart!', jsonResponse);
+                })
+                .catch(error => console.error('Error:', error))
+        }*/
+
+
+    </script>
+    <hr/>
+</head>
+<body>
+<div class="container">
+
+    <div class="col-sm-12 col-md-12">
+        <div id="headerContainer" style="background-color: aliceblue;height: 50px">
+            <!--<img src="../images/logo.jpg" />-->
+            <nav class="navbar navbar-default" style="background-color: aliceblue;height: 70px">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-10 col-md-10" style="font-size: large;color:green">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/menu">Menu</a></li>
+                                <li><a href="/getOrders">Get Orders</a></li>
+                                <li><a href="/cart">Cart</a></li>
+                                <li><a href="/logout">LogOut</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-2 col-md-2" style="font-size: large;color:green;padding-left: 115px">
+                            <img src="<%= '../images/sb.png' %>" alt="" class="logo"
+                                 style="width: 70px; height: 65px ;display: block;margin:">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <br/><br/>
+        <div class="row">
+            <div class="col-sm-2" style="font-size: large;color:green"><b>
+                    <center>Drink</center>
+                </b></div>
+            <div class="col-sm-3" style="font-size: large;color:green"><b>
+                    <center>Calories</center>
+                </b></div>
+            <div class="col-sm-3" style="font-size: large;color:green"><b>
+                    <center>Price</center>
+                </b></div>
+        </div>
+        <hr/>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+
+                <!--  <table>
+
+                 <tbody> -->
+                <% console.log(resp);  for(var i = 0; i < 5; i++) { %>
+
+                <!-- <tr> -->
+
+
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#<%= i %>">
+                            <div class="row">
+                                <span style="display: none" id="storedItem<%= i %>"><%= JSON.stringify(resp[i]) %></span>
+                                <div class="col-sm-3"><%= resp[i].name %></div>
+                                <div class="col-sm-3"><%= resp[i].calories %></div>
+                                <div class="col-sm-3"><%= resp[i].price %></div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-success"
+                                            onclick="addToCart(<%=i%>)">Add to cart
+                                    </button>
+                                </div>
+                            </div>
+                        </a>
+                    </h4>
+                </div>
+                <!--  </tr>
+                 <tr> -->
+                <div id="<%= i %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <%= resp[i].description %> <br/><br/>
+                        <b>Fat</b> : <%= resp[i].fat %> <br/>
+                        <b>Sodium</b> : <%= resp[i].sodium %> <br/>
+                        <b>Cholestrol</b> : <%= resp[i].cholestrol %> <br/>
+                        <b>Caffeine</b> : <%= resp[i].caffeine %> <br/>
+                        <b>Protein</b> : <%= resp[i].protein %> <br/>
+                    </div>
+                </div><!-- </tr> -->
+                <% } %>
+
+                <!-- </tbody>
+                </table> -->
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+
+                <a href="/cart" class="btn btn-success">Go To Cart</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <form action="/home">
+
+    </form>
+
+</div>
+</div>
+</body>
+</html>

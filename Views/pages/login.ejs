@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body {
+            padding-top: 80px;
+        }
+    </style>
+</head>
+<body style="background-image:url(../images/SB.jpg);background-repeat: no-repeat; background-size: cover;">
+<div class="container">
+<!-- <img src="<%= '../images/sb.png' %>" alt="" class="logo" style="width: 100px; display: block; margin-left: auto; margin-right: auto">-->
+<div class="col-sm-6 col-sm-offset-3" style="margin-left: 630px">
+
+    <h1 style="color: darkgreen"><span class="fa fa-sign-in"></span> Login</h1>
+
+    <!-- LOGIN FORM -->
+    <form action="/login" method="post" style="align-content: right;color: darkgreen">
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg">Login</button>
+    </form>
+
+    <hr>
+
+    <strong style="color: darkgreen;font-size: large">New User? <a href="/signup">SignUp</a></strong>
+
+</div>
+</div>
+</body>
+</html>
